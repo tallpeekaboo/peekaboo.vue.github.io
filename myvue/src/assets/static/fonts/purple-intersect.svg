@@ -1,0 +1,14 @@
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<h1>404 Not Found</h1>
+<ul>
+<li>Code: NoSuchKey</li>
+<li>Message: The specified key does not exist.</li>
+<li>Key: static_assets/udemy/js/images/purple-intersect.svg</li>
+<li>RequestId: 60A823A6893C83F8</li>
+<li>HostId: SnHMRvifhoGQMpPaDb1lu1CmvpZR0kewsXRNEW2A/QoMB/W6DijkrOzTgqPCm33s4dwLsDyd5mw=</li>
+</ul>
+<hr/>
+</body>
+</html>
