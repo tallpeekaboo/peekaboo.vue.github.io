@@ -13,6 +13,11 @@ import register from '@/components/register'
 import server from '@/components/server'
 import worktype from '@/components/worktype'
 
+
+import head from '@/components/head'
+import body from '@/components/body'
+import tail from '@/components/tail'
+
 Vue.use(Router)
 
 var routes = [
@@ -20,11 +25,22 @@ var routes = [
           path:'/',
           name:'index',
           component:index
-        },
-        {
+        },{
           path:'/myindex',
           name:'myindex',
           component:myindex
+        },{
+          path:'/head',
+          name:'head',
+          component:head
+        },{
+          path:'/body',
+          name:'body',
+          component:body
+        },{
+          path:'/tail',
+          name:'tail',
+          component:tail
         },
         
 ]
