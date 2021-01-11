@@ -67,74 +67,7 @@
       data-module-args='{"uiMessages":[]}'
       data-module-priority="-10"
     ></div>
-    <div class="main-content">
-      <div class="ud-component--logged-out-home--billboard">
-        <div data-unique-id="340" style="display: none"></div>
-        <div data-purpose="billboard" class="billboard--billboard--3-fQr">
-          <div class="billboard--image-container--2JRqQ">
-            <img
-              src="../assets/static/picture/77f9aaeb-0bd4-48ff-ad3a-c88ff9f5f0fb.jpg"
-              width="1340"
-              height="400"
-              alt=""
-            />
-          </div>
-          <div class="billboard--content-box--JtXUJ">
-            <h1
-              class="udlite-heading-xxl"
-              data-purpose="safely-set-inner-html:billboard:title"
-            >
-              优惠延长一天！
-            </h1>
-            <p
-              class="udlite-text-md"
-              data-purpose="safely-set-inner-html:billboard:subtitle"
-            >
-              课程 US$9.99 起。<b>此外，可获取免费学习指南</b>。<u
-                ><a
-                  target="_blank"
-                  href="https://support.udemy.com/hc/articles/360058080354"
-                  >条款适用</a
-                ></u
-              >。
-            </p>
-            <div
-              class="udlite-search-form-autocomplete billboard--search-bar--3s2y1 udlite-form-group"
-            >
-              <label
-                class="udlite-sr-only udlite-form-label udlite-heading-sm"
-                for="u340-search-form-autocomplete--1"
-                >您想学习什么内容？</label
-              >
-              <form
-                action="/courses/search/"
-                class="udlite-search-form-autocomplete-input-group"
-              >
-                <input
-                  placeholder="您想学习什么内容？"
-                  name="q"
-                  autoComplete="off"
-                  value=""
-                  id="u340-search-form-autocomplete--1"
-                  class="udlite-text-input udlite-text-input-large udlite-text-md udlite-search-form-autocomplete-input"
-                /><button
-                  type="submit"
-                  class="udlite-btn udlite-btn-large udlite-btn-ghost udlite-heading-md udlite-btn-icon udlite-btn-icon-large"
-                >
-                  <svg
-                    aria-label="提交搜索"
-                    focusable="false"
-                    class="udlite-icon udlite-icon-medium udlite-icon-color-neutral"
-                  >
-                    <use xlink:href="#icon-search"></use>
-                  </svg>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </template>
 

@@ -14,36 +14,39 @@ import server from '@/components/server'
 import worktype from '@/components/worktype'
 
 
-import head from '@/components/head'
 import body from '@/components/body'
-import tail from '@/components/tail'
+import Myregister from "@/components/Myregister";
+import Mylogin from "@/components/Mylogin";
 
 Vue.use(Router)
 
 var routes = [
-        {
-          path:'/',
-          name:'index',
-          component:index
-        },{
-          path:'/myindex',
-          name:'myindex',
-          component:myindex
-        },{
-          path:'/head',
-          name:'head',
-          component:head
-        },{
-          path:'/body',
-          name:'body',
-          component:body
-        },{
-          path:'/tail',
-          name:'tail',
-          component:tail
-        },
-        
-]
+  {
+    path: "/",
+    name: "index",
+    component: index
+  },
+  {
+    path: "/myindex",
+    name: "myindex",
+    component: myindex
+  },
+  {
+    path: "/body",
+    name: "body",
+    component: body
+  },
+  {
+    path: "/myregister",
+    name: "Myregister",
+    component: Myregister
+  },
+  {
+    path: "/mylogin",
+    name: "Mylogin",
+    component: Mylogin
+  }
+];
 
 export default new Router({
   routes:routes,
