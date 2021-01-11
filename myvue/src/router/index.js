@@ -14,7 +14,6 @@ import server from '@/components/server'
 import worktype from '@/components/worktype'
 
 
-import body from '@/components/body'
 import Myregister from "@/components/Myregister";
 import Mylogin from "@/components/Mylogin";
 
@@ -30,11 +29,6 @@ var routes = [
     path: "/myindex",
     name: "myindex",
     component: myindex
-  },
-  {
-    path: "/body",
-    name: "body",
-    component: body
   },
   {
     path: "/myregister",
