@@ -20,7 +20,7 @@
             ></van-field>
 
             <van-button type="primary" @click="submit">登&emsp;录</van-button>
-            <van-button type="info">重&emsp;置</van-button>
+            <van-button type="info" @click="reset">重&emsp;置</van-button>
         </van-cell-group>
         </div>
         <!-- 尾部开始 -->
@@ -61,6 +61,10 @@ export default {
                 console.log(resp.data)
                 this.$toast(resp.data.msg)
             })
+        },
+        reset(){
+            this.username = '',
+            this.password = ''
         }
     },
     created() {

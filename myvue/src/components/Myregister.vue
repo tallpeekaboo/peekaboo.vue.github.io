@@ -26,6 +26,12 @@
         ></van-field>
 
         <van-field
+          v-model="email"
+          label="邮箱"
+          placeholder="请输入邮箱"
+        ></van-field>
+
+        <van-field
           v-model="password"
           label="密码"
           placeholder="请输入密码"
@@ -38,7 +44,7 @@
         ></van-field>
 
         <van-button type="primary" @click="submit">注&emsp;册</van-button>
-        <van-button type="info">重&emsp;置</van-button>
+        <van-button type="info" @click="reset">重&emsp;置</van-button>
       </van-cell-group>
     </div>
 
@@ -60,6 +66,7 @@ export default {
       password1: "",
       phone:"",
       gender:"",
+      email:"",
     };
   },
   components: { Head, Tail },
@@ -77,7 +84,14 @@ export default {
       ) {
         this.$toast("手机号不能为空");
         return false;
-      }         
+      }      
+      
+      if (
+        (this.email == "")
+      ) {
+        this.$toast("邮箱不能为空");
+        return false;
+      }    
       
       if (
         (this.gender == "")
@@ -108,13 +122,22 @@ export default {
           password: this.password,
           password1: this.password1,
           phone:this.phone,
-          gender:this.gender
+          gender:this.gender,
+          email:this.email,
         },
       }).then((resp) => {
         console.log(resp.data);
         this.$toast(resp.data.msg)
-      });
+      })
     },
+    reset(){
+        this.username = '',
+        this.password = '',
+        this.password1 = '',
+        this.phone = '',
+        this.gender = '',
+        this.email = ''
+      }
   },
   created() {},
 };
