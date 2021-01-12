@@ -24,6 +24,13 @@
             </van-tabs>
 
             <van-field v-model="password" label="密码" placeholder="请输入密码"></van-field>
+            
+            <!-- 验证码 -->
+            <van-cell-group>
+                <drag-verify :width='width' :height="height" :text="text" ref="Verify">
+
+                </drag-verify>
+            </van-cell-group>
 
             <van-button type="primary" @click="submit">登&emsp;录</van-button>
             <van-button type="info" @click="reset">重&emsp;置</van-button>
@@ -37,17 +44,25 @@
 
 <script>
 import axios from 'axios'
+
 import Head from './head.vue'
+
 import Tail from './tail.vue'
+
+import dragVerify from 'vue-drag-verify'
+
 export default {
     data() {
         return {
             username:'',
             password:"",
-            active:0
+            active:0,
+            width:320,
+            height:42,
+            text:'请 您 拖 动 滑 块'
         }
     },
-    components:{Head,Tail},
+    components:{Head,Tail,dragVerify},
     methods: {
         submit(){
             if(this.username == ''){
@@ -57,17 +72,22 @@ export default {
             if(this.password == ''){
                 this.$toast('密码不能为空')
             }
-            axios({
-                url:'http://127.0.0.1:8000/login/',
-                method:'post',
-                data:{
-                   username:this.username,
-                   password:this.password, 
-                }
-            }).then(resp=>{
-                console.log(resp.data)
-                this.$toast(resp.data.msg)
-            })
+            if(this.$refs.Verify.isPassing == true){
+                axios({
+                    url:'http://127.0.0.1:8000/login/',
+                    method:'post',
+                    data:{
+                    username:this.username,
+                    password:this.password,
+                    active:this.active
+                    }
+                }).then(resp=>{
+                    console.log(resp.data)
+                    this.$toast(resp.data.msg)
+                })
+            }else{
+                this.$toast('请先拖动滑块验证')
+            }
         },
         reset(){
             this.username = '',
