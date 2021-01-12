@@ -7,17 +7,23 @@
         <!-- 表单区域 -->
         <div class="udlite-container partners">
         <van-cell-group>
-            <van-field
-            v-model="username"
-            label="用户名"
-            placeholder="请输入用户名/手机号"
-            ></van-field>        
+            <van-tabs v-model="active">
 
-            <van-field
-            v-model="password"
-            label="密码"
-            placeholder="请输入密码"
-            ></van-field>
+            <van-tab title="用户名登录">
+            <van-field v-model="username" label="用户名" placeholder="请输入用户名"></van-field>        
+            </van-tab>
+
+            <van-tab title="手机号登录">
+            <van-field v-model="username" label="手机号" placeholder="请输入手机号"></van-field>        
+            </van-tab>
+
+            <van-tab title="邮箱登录">
+            <van-field v-model="username" label="邮箱" placeholder="请输入邮箱"></van-field>        
+            </van-tab>
+
+            </van-tabs>
+
+            <van-field v-model="password" label="密码" placeholder="请输入密码"></van-field>
 
             <van-button type="primary" @click="submit">登&emsp;录</van-button>
             <van-button type="info" @click="reset">重&emsp;置</van-button>
@@ -38,6 +44,7 @@ export default {
         return {
             username:'',
             password:"",
+            active:0
         }
     },
     components:{Head,Tail},
