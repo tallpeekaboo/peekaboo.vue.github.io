@@ -32,6 +32,17 @@
                 </drag-verify>
             </van-cell-group>
 
+            <van-cell-group>
+                
+                <img :src="src" @click="changecode">
+
+            </van-cell-group>
+
+            <!-- 图片验证码 -->
+            <van-field v-model="code" label="验证码" placeholder="请输入验证码"></van-field> 
+
+
+
             <van-button type="primary" @click="submit">登&emsp;录</van-button>
             <van-button type="info" @click="reset">重&emsp;置</van-button>
         </van-cell-group>
@@ -59,7 +70,9 @@ export default {
             active:0,
             width:320,
             height:42,
-            text:'请 您 拖 动 滑 块'
+            text:'请 您 拖 动 滑 块',
+            code:"",
+            src:"http://127.0.0.1:8000/mycode/",
         }
     },
     components:{Head,Tail,dragVerify},
@@ -72,21 +85,14 @@ export default {
             if(this.password == ''){
                 this.$toast('密码不能为空')
             }
+
+            if(this.code == ''){
+                this.$toast('验证码不能为空')
+                return
+            }
             if(this.$refs.Verify.isPassing == true){
-                // axios({
-                //     url:'http://127.0.0.1:8000/login/',
-                //     method:'post',
-                //     data:{
-                //     username:this.username,
-                //     password:this.password,
-                //     active:this.active
-                //     }
-                // }).then(resp=>{
-                //     console.log(resp.data)
-                //     this.$toast(resp.data.msg)
-                // })
                 this.axios.post('http://127.0.0.1:8000/login/',this.qs.stringify({
-                    'username':this.username,'password':this.password,'active':this.active
+                    'username':this.username,'password':this.password,'active':this.active,'code':this.code
                 })).then(resp=>{
                     console.log(resp.data)
                     alert(resp.data.msg)
@@ -98,7 +104,15 @@ export default {
         reset(){
             this.username = '',
             this.password = ''
-        }
+        },
+
+        //变更验证码
+        changecode(){
+            
+            var num = Math.ceil(Math.random()*10);
+
+            this.src = this.src + "?num=" + num;
+        },
     },
     created() {
 
@@ -107,5 +121,10 @@ export default {
 </script>
 
 <style scoped>
+
+img{
+    cursor:pointer;
+}
+
 
 </style>
