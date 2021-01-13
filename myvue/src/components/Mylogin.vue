@@ -73,17 +73,23 @@ export default {
                 this.$toast('密码不能为空')
             }
             if(this.$refs.Verify.isPassing == true){
-                axios({
-                    url:'http://127.0.0.1:8000/login/',
-                    method:'post',
-                    data:{
-                    username:this.username,
-                    password:this.password,
-                    active:this.active
-                    }
-                }).then(resp=>{
+                // axios({
+                //     url:'http://127.0.0.1:8000/login/',
+                //     method:'post',
+                //     data:{
+                //     username:this.username,
+                //     password:this.password,
+                //     active:this.active
+                //     }
+                // }).then(resp=>{
+                //     console.log(resp.data)
+                //     this.$toast(resp.data.msg)
+                // })
+                this.axios.post('http://127.0.0.1:8000/login/',this.qs.stringify({
+                    'username':this.username,'password':this.password,'active':this.active
+                })).then(resp=>{
                     console.log(resp.data)
-                    this.$toast(resp.data.msg)
+                    alert(resp.data.msg)
                 })
             }else{
                 this.$toast('请先拖动滑块验证')
