@@ -58,6 +58,7 @@
           />
         </div>
         <div style="flex: 1"></div>
+        <div v-if="username">欢迎"<b>{{username}}</b>"来到首页</div><div v-else><router-link to="mylogin"><van-button type="primary" size="mini">登录</van-button></router-link></div>&emsp;&emsp;<van-button type="primary" size="mini" v-show="username!=null" @click="out">退出</van-button>
       </div>
     </div>
 
@@ -75,9 +76,17 @@
 import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      username:sessionStorage.getItem('username')
+    };
   },
-  methods: {},
+  methods: {
+    out(){
+      sessionStorage.removeItem('username')
+      sessionStorage.removeItem('token')
+      this.$router.go(0)
+    }
+  },
   created() {},
 };
 </script>

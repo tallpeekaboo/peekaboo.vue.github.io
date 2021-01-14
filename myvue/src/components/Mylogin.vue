@@ -96,6 +96,11 @@ export default {
                 })).then(resp=>{
                     console.log(resp.data)
                     alert(resp.data.msg)
+                    if(resp.data.code == 200){
+                        sessionStorage.setItem('username',this.username)
+                        sessionStorage.setItem('token',resp.data.token)
+                        this.$router.push('myindex')
+                    }
                 })
             }else{
                 this.$toast('请先拖动滑块验证')
