@@ -58,7 +58,12 @@
           />
         </div>
         <div style="flex: 1"></div>
-        <div v-if="username">欢迎"<b>{{username}}</b>"来到首页</div><div v-else><router-link to="mylogin"><van-button type="primary" size="mini">登录</van-button></router-link></div>&emsp;&emsp;<van-button type="primary" size="mini" v-show="username!=null" @click="out">退出</van-button>
+        <div v-if="username">欢迎"<b><router-link to='user'>{{username}}</router-link></b>"来到首页</div>
+        <div v-else>
+          <router-link to="mylogin"><van-button type="primary" size="mini">登&emsp;录</van-button></router-link>&emsp;&emsp;
+          <router-link to="myregister"><van-button type="primary" size="mini">注&emsp;册</van-button></router-link>&emsp;&emsp;
+        </div>
+        &emsp;&emsp;<van-button type="primary" size="mini" v-show="username!=null" @click="out">注&emsp;销</van-button>
       </div>
     </div>
 
@@ -77,17 +82,19 @@ import axios from "axios";
 export default {
   data() {
     return {
-      username:sessionStorage.getItem('username')
+      username:localStorage.getItem('username')
     };
   },
   methods: {
+    //注销用户
     out(){
-      sessionStorage.removeItem('username')
-      sessionStorage.removeItem('token')
-      this.$router.go(0)
+      localStorage.removeItem('username')
+      localStorage.removeItem('token')
+      this.$router.push('mylogin')
     }
   },
   created() {},
+  mounted(){},
 };
 </script>
 

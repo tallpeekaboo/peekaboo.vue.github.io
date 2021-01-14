@@ -97,8 +97,8 @@ export default {
                     console.log(resp.data)
                     alert(resp.data.msg)
                     if(resp.data.code == 200){
-                        sessionStorage.setItem('username',this.username)
-                        sessionStorage.setItem('token',resp.data.token)
+                        localStorage.setItem('username',this.username)
+                        localStorage.setItem('token',resp.data.token)
                         this.$router.push('myindex')
                     }
                 })
