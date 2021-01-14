@@ -33,7 +33,19 @@ export default {
     methods: {
         update(uid) {
             var password = prompt('请输入新密码')
+            if(password == ''){
+                this.$toast('新密码不能为空')
+                return
+            }
+            if(password === null){
+                this.$toast('取消修改')
+                return
+            }
             var password1 = prompt('确认密码')
+            if(password1 === null){
+                this.$toast('取消修改')
+                return
+            }
             if(password != password1){
                 this.$toast('两次密码输入不正确')
                 return
