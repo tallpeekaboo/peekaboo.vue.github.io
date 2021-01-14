@@ -15,7 +15,7 @@
                 <th>{{item.gender}}</th>
                 <th>{{item.phone}}</th>
                 <th>{{item.email}}</th>
-                <th colspan="4"><van-button type="warning" @click="update(item.id)">修改</van-button></th>
+                <th colspan="4"><van-button type="warning" @click="update()">修改</van-button></th>
             </tr>
         </table>
     </div>
@@ -41,8 +41,10 @@ export default {
                 axios({
                     url:'http://127.0.0.1:8000/user/',
                     method:'put',
+                    params:{
+                        token:this.token
+                    },
                     data:{
-                        'uid':uid,
                         'password':password,
                     }
                 }).then(resp=>{
