@@ -17,6 +17,7 @@ import worktype from '@/components/worktype'
 import Myregister from "@/components/Myregister";
 import Mylogin from "@/components/Mylogin";
 import myhome from "@/components/myhome";
+import ding_login from "@/components/ding_login";
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ var routes = [
     path: "/mylogin",
     name: "Mylogin",
     component: Mylogin
+  },
+  {
+    path: "/dinglogin",
+    name: "ding_login",
+    component: ding_login
   },
   {
     path: "/myhome",

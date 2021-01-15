@@ -14,6 +14,7 @@
                 <th>邮&emsp;箱</th>
                 <th>修改密码</th>
                 <th>上传头像</th>
+                <th>删除头像</th>
 
             </tr>
             <tr v-for="item in user_list" :key="item.id">
@@ -25,6 +26,7 @@
                 <th>{{item.email}}</th>
                 <th><van-button type="warning" @click="update()">修改</van-button></th>
                 <th class="udlite-container partners"><van-uploader :after-read="afterRead"/></th>
+                <th><van-button type="danger" @click="del" v-show="item.img!=null">删除头像</van-button></th>
             </tr>
         </table>
 
@@ -101,6 +103,19 @@ export default {
                     this.$router.go(0)
                 })
         },
+        del(){
+            axios({
+                url:'http://127.0.0.1:8000/downimg/',
+                method:'put',
+                params:{
+                    token:this.token
+                }
+            }).then(resp=>{
+                console.log(resp.data)
+                this.$toast(resp.data.msg)
+                this.$router.go(0)
+            })
+        }
     },
     created() {
         axios({
@@ -112,6 +127,7 @@ export default {
         }).then(resp=>{
             console.log(resp.data)
             this.user_list = resp.data
+
         })
     }
 }
