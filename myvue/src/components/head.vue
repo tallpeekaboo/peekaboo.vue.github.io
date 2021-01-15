@@ -58,7 +58,7 @@
           />
         </div>
         <div style="flex: 1"></div>
-        <div v-if="username">欢迎"<b><router-link to='/myhome'>{{username}}</router-link></b>"来到首页</div>
+        <div v-if="username">欢迎"<b><router-link to='/myhome'>{{username}}</router-link></b>"来到首页&emsp;&emsp;<b v-for="item in user" :key="item.id"><van-image round width="3rem" height="3rem" :src="'http://127.0.0.1:8000/' + item.img"/></b></div>
         <div v-else>
           <router-link to="mylogin"><van-button type="primary" size="mini">登&emsp;录</van-button></router-link>&emsp;&emsp;
           <router-link to="myregister"><van-button type="primary" size="mini">注&emsp;册</van-button></router-link>&emsp;&emsp;
@@ -82,7 +82,9 @@ import axios from "axios";
 export default {
   data() {
     return {
-      username:localStorage.getItem('username')
+      username:localStorage.getItem('username'),
+      token:localStorage.getItem('token'),
+      user:[]
     };
   },
   methods: {
@@ -93,7 +95,18 @@ export default {
       this.$router.push('mylogin')
     }
   },
-  created() {},
+  created() {
+        axios({
+          url:'http://127.0.0.1:8000/user/',
+          method:'get',
+          params:{
+              token:this.token
+              }
+        }).then(resp=>{
+            console.log(resp.data)
+            this.user = resp.data
+        })
+  },
   mounted(){},
 };
 </script>
