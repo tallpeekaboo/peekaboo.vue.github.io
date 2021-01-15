@@ -16,7 +16,7 @@ import worktype from '@/components/worktype'
 
 import Myregister from "@/components/Myregister";
 import Mylogin from "@/components/Mylogin";
-import user from "@/components/user";
+import myhome from "@/components/myhome";
 
 Vue.use(Router)
 
@@ -42,9 +42,18 @@ var routes = [
     component: Mylogin
   },
   {
-    path: "/user",
-    name: "user",
-    component: user
+    path: "/myhome",
+    name: "myhome",
+    component: myhome,
+    // 拦截器使用
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("username")) {
+        console.log("登录了");
+        next();
+      } else {
+        next("/mylogin");
+      }
+    }
   }
 ];
 
