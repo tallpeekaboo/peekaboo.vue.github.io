@@ -98,28 +98,10 @@ export default {
     
     
     junp(){
-      for(let i of this.access){
-        // console.log(i[2])
-        if(i[2] != 3){
-          continue
-          this.$toast('没有权限')
-        }else{
-          this.$router.push('myhome')
-        }
-      }
+      this.$router.push('myhome')
     },
   },
   created() {
-      axios({
-      url:'http://127.0.0.1:8000/getaccess/',
-      method:'get',
-      params:{
-          token:localStorage.getItem('token')
-      }
-      }).then(resp=>{
-      this.access = resp.data
-      
-      })
       if(this.token){
           axios({
             url:'http://127.0.0.1:8000/user/',

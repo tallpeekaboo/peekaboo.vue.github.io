@@ -1,42 +1,33 @@
 <template>
     <div>
-        <ul v-for="cate in cate_list" :key="cate.id">
-            <li>-{{cate.name}}
-                <ul v-for="children in cate.children" :key="children.id">
-                    <li>-{{children.name}}
-                        <ul v-for="item in children.children" :key="item.id">
-                            <li>-{{item.name}}</li>
-                        </ul>
-                    </li>
+        <li>
+            <div>{{data.name}}</div>
+                <ul v-if="data.children && data.children.length > 0">
+                    <mycate v-for="child in data.children" :key="child.id" :data='child'/>
+
                 </ul>
-            </li>
-        </ul> 
+        </li>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 export default {
-    data() {
-        return {
-            cate_list:[]
-        }
-    },
+    name:'mycate',
+    props:['data'],
+
     methods: {
 
     },
     created() {
-        axios({
-            url:'http://127.0.0.1:8000/get_cate',
-            method:'get'
-        }).then(resp=>{
-            console.log(resp.data[0])
-            this.cate_list = resp.data
-        })
+
     }
 }
 </script>
 
 <style scoped>
-
+ul{
+    padding-left: 0px;
+    list-style: none;
+}
 </style>

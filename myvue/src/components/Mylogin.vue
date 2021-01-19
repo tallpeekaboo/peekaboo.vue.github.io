@@ -108,6 +108,7 @@ export default {
                     'username':this.username,'password':this.password,'active':this.active,'code':this.code
                 })).then(resp=>{
                     console.log(resp.data)
+                    console.log(this.username,this.code)
                     alert(resp.data.msg)
                     if(resp.data.code == 200){
                         localStorage.setItem('username',this.username)
@@ -147,26 +148,7 @@ export default {
         }
     },
     created() {
-        if(this.token){
-            axios({
-            url:'http://127.0.0.1:8000/getaccess/',
-            method:'get',
-            params:{
-                token:localStorage.getItem('token'),
-            }
-            }).then(resp=>{
-            console.log(resp.data)
-            if(resp.data[1][1] != '登录'){
-                console.log('没有权限')
-                // this.$router.go(-1)
-                this.$toast('您没有权限访问该功能')
-            }else{
-                console.log('有权限')
-            }
-            })
-        }else{
-           console.log('未登录状态') 
-        }
+
     }
     }
 </script>

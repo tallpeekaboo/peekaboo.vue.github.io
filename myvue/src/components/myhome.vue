@@ -60,7 +60,6 @@ export default {
     return {
       token: localStorage.getItem("token"),
       user_list: [],
-      access: [],
     };
   },
   components: { Head, Tail },
@@ -141,16 +140,7 @@ export default {
     }).then((resp) => {
       console.log(resp.data);
       this.user_list = resp.data;
-    }),
-      axios({
-        url: "http://127.0.0.1:8000/getaccess/",
-        method: "get",
-        params: {
-          token: this.token,
-        },
-      }).then((resp) => {
-        this.access = resp.data;
-      });
+    })
   },
 };
 </script>
