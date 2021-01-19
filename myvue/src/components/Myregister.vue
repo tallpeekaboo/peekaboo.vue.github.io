@@ -139,7 +139,9 @@ export default {
         this.email = ''
       }
   },
-  created() {},
+  created() {
+    
+  },
 };
 </script>
 

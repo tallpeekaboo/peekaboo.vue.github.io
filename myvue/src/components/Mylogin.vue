@@ -45,7 +45,16 @@
 
             <van-button type="primary" @click="submit">登&emsp;录</van-button>
             <van-button type="info" @click="reset">重&emsp;置</van-button>
-            <van-button type="info" @click="ding">钉钉登录</van-button>
+
+            <!-- 钉钉登录 -->
+            <van-cell-group>
+                <img src="http://127.0.0.1:8000/static/dingding.png" alt="" @click="ding" width="150px;">
+            </van-cell-group>
+
+            <!-- 码云登录 -->
+            <van-cell-group>
+                <img src="http://127.0.0.1:8000/static/mayun.png" alt="" width="150px;" @click="gitee">
+            </van-cell-group>
         </van-cell-group>
         </div>
         <!-- 尾部开始 -->
@@ -71,10 +80,12 @@ export default {
             active:0,
             width:320,
             height:42,
+            token:localStorage.getItem('token'),
             text:'请 您 拖 动 滑 块',
             code:"",
             src:"http://127.0.0.1:8000/mycode/",
-            url:"http://127.0.0.1:8000/ding/"
+            ding_url:"http://127.0.0.1:8000/ding/",
+            gitee_url:'http://127.0.0.1:8000/gitee/',
         }
     },
     components:{Head,Tail,dragVerify},
@@ -122,19 +133,42 @@ export default {
         },
 
         ding(){
-            window.location.href = this.url
+            window.location.href = this.ding_url
             axios({
                 url:'http://127.0.0.1:8000/dingding_back/',
                 method:'get'
             }).then(resp=>{
                 console.log(resp.data)
             })
+        },
+
+        gitee(){
+            window.location.href = this.gitee_url
         }
     },
     created() {
-
+        if(this.token){
+            axios({
+            url:'http://127.0.0.1:8000/getaccess/',
+            method:'get',
+            params:{
+                token:localStorage.getItem('token'),
+            }
+            }).then(resp=>{
+            console.log(resp.data)
+            if(resp.data[1][1] != '登录'){
+                console.log('没有权限')
+                // this.$router.go(-1)
+                this.$toast('您没有权限访问该功能')
+            }else{
+                console.log('有权限')
+            }
+            })
+        }else{
+           console.log('未登录状态') 
+        }
     }
-}
+    }
 </script>
 
 <style scoped>

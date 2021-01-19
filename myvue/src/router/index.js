@@ -18,6 +18,8 @@ import Myregister from "@/components/Myregister";
 import Mylogin from "@/components/Mylogin";
 import myhome from "@/components/myhome";
 import ding_login from "@/components/ding_login";
+import gitee_login from "@/components/gitee_login";
+import mycate from "@/components/mycate";
 
 Vue.use(Router)
 
@@ -46,6 +48,16 @@ var routes = [
     path: "/dinglogin",
     name: "ding_login",
     component: ding_login
+  },
+  {
+    path: "/mycate",
+    name: "mycate",
+    component: mycate
+  },
+  {
+    path: "/giteelogin",
+    name: "gitee_login",
+    component: gitee_login
   },
   {
     path: "/myhome",

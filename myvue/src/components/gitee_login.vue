@@ -6,8 +6,8 @@
             <van-cell-group>
                 <van-tabs>
 
-                    <van-tab title="钉钉用户名登录">
-                    <van-field v-model="username" label="用户名" placeholder="请输入钉钉用户名"></van-field>        
+                    <van-tab title="Gitee用户名登录">
+                    <van-field v-model="username" label="用户名" placeholder="请输入Gitee用户名"></van-field>        
                     </van-tab>
 
                 </van-tabs>
@@ -38,7 +38,7 @@ export default {
     methods: {
         login(){
             axios({
-                url:'http://127.0.0.1:8000/ding_login/',
+                url:'http://127.0.0.1:8000/gitee_login/',
                 method:'post',
                 data:{
                     username:this.username

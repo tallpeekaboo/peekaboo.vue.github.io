@@ -58,7 +58,7 @@
           />
         </div>
         <div style="flex: 1"></div>
-        <div v-if="username">欢迎"<b><router-link to='/myhome'>{{username}}</router-link></b>"来到首页&emsp;&emsp;<b v-for="item in user" :key="item.id"><van-image round width="3rem" height="3rem" :src="'http://127.0.0.1:8000/' + item.img"/></b></div>
+        <div v-if="username">欢迎"<b><span @click="junp">{{username}}</span></b>"来到首页&emsp;&emsp;<b v-for="item in user" :key="item.id"><van-image round width="3rem" height="3rem" :src="'http://127.0.0.1:8000/' + item.img"/></b></div>
         <div v-else>
           <router-link to="mylogin"><van-button type="primary" size="mini">登&emsp;录</van-button></router-link>&emsp;&emsp;
           <router-link to="myregister"><van-button type="primary" size="mini">注&emsp;册</van-button></router-link>&emsp;&emsp;
@@ -84,7 +84,8 @@ export default {
     return {
       username:localStorage.getItem('username'),
       token:localStorage.getItem('token'),
-      user:[]
+      user:[],
+      access:[],
     };
   },
   methods: {
@@ -93,21 +94,47 @@ export default {
       localStorage.removeItem('username')
       localStorage.removeItem('token')
       this.$router.push('mylogin')
-    }
+    },
+    
+    
+    junp(){
+      for(let i of this.access){
+        // console.log(i[2])
+        if(i[2] != 3){
+          continue
+          this.$toast('没有权限')
+        }else{
+          this.$router.push('myhome')
+        }
+      }
+    },
   },
   created() {
-        axios({
-          url:'http://127.0.0.1:8000/user/',
-          method:'get',
-          params:{
-              token:this.token
-              }
-        }).then(resp=>{
-            console.log(resp.data)
-            this.user = resp.data
-        })
+      axios({
+      url:'http://127.0.0.1:8000/getaccess/',
+      method:'get',
+      params:{
+          token:localStorage.getItem('token')
+      }
+      }).then(resp=>{
+      this.access = resp.data
+      
+      })
+      if(this.token){
+          axios({
+            url:'http://127.0.0.1:8000/user/',
+            method:'get',
+            params:{
+                token:this.token
+                }
+          }).then(resp=>{
+              console.log(resp.data)
+              this.user = resp.data
+          })
+      }else{
+        return false
+      }
   },
-  mounted(){},
 };
 </script>
 
