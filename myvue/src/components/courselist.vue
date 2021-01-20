@@ -1,9 +1,8 @@
 <template>
     <div class="udlite-container partners">
         <!-- 表格控件 -->
-        <van-grid v-for="(item,index) in data" :key="index.id">
-            <van-grid-item icon="'http://127.0.0.1:8000/static/upload/' + item.id"  
-            link-type='redirectTo'
+        <van-grid v-for="(item,index) in data" :key="index">
+            <van-grid-item link-type='redirectTo'
             :url="'courseinfo?cid=' + item.id">
             <b>{{item.title}}</b>
             <video width="300" height="240" :src="src + item.video" controls='controls' autoplay='autoplay' muted></video>
@@ -12,9 +11,9 @@
 
         <!-- 分页控件 -->
         <van-pagination @change="get_course" v-model="page" :total-items="total" :items-per-page="size"/>
-        <input type="text" v-model="junp"/>
+        <input type="text" v-model="ye"/>
 
-        <button @click="get_course">跳</button>
+        <button @click="jump">跳</button>
     </div>
 </template>
 
@@ -23,16 +22,11 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            icon:'http://1127.0.0.1:8000/static/upload/',
-
-
-
-
             data:[],
             page:1,
             size:1,
             total:0,
-            junp:'',
+            ye:'',
             src:'http://127.0.0.1:8000/static/upload/'
         }
     },
@@ -42,14 +36,32 @@ export default {
                 url:'http://127.0.0.1:8000/course/',
                 method:'get',
                 params:{
-                    junp:this.junp,
                     page:this.page,
                 }
             }).then(resp=>{
                 console.log(resp.data)
                 this.data = resp.data.data
-                this.total = resp.data.total
-                // this.page = Number(resp.data.junp)
+                this.total = resp.data.total      
+            })
+        },
+        jump(){
+            if(this.ye > this.total){
+                this.ye = this.total
+            }
+            if(this.ye < 1){
+                this.ye = 1
+            }
+            this.page = Number(this.ye)
+            axios({
+                url:'http://127.0.0.1:8000/course/',
+                method:'get',
+                params:{
+                    page:this.ye,
+                }
+            }).then(resp=>{
+                console.log(resp.data)
+                this.data = resp.data.data
+                this.total = resp.data.total      
             })
         }
     },
