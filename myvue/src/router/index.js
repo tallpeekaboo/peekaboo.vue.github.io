@@ -22,6 +22,8 @@ import gitee_login from "@/components/gitee_login";
 import mycate from "@/components/mycate";
 import showcate from "@/components/showcate";
 import add_course from "@/components/add_course";
+import courselist from "@/components/courselist";
+import courseinfo from "@/components/courseinfo";
 
 Vue.use(Router)
 
@@ -65,6 +67,16 @@ var routes = [
     path: "/add_course",
     name: "add_course",
     component: add_course
+  },
+  {
+    path: "/courseinfo",
+    name: "courseinfo",
+    component: courseinfo
+  },
+  {
+    path: "/courselist",
+    name: "courselist",
+    component: courselist
   },
   {
     path: "/giteelogin",

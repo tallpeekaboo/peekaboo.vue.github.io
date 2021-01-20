@@ -19,7 +19,7 @@
             
             <!-- 视频控件 -->
             <van-cell-group class="udlite-container partners">
-                <video width="300" height="240" :src="src" controls='controls' autoplay='autoplay'></video>
+                <video width="300" height="240" :src="src" controls='controls' autoplay='autoplay' muted></video>
             </van-cell-group>
             </van-tab>
             </van-tabs>
