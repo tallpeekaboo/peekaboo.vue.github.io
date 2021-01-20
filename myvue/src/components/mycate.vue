@@ -1,7 +1,7 @@
 <template>
     <div>
         <li>
-            <div>{{data.name}}</div>
+            <div><a :href="'add_course?cid='+ data.id">{{data.name}}</a></div>
                 <ul v-if="data.children && data.children.length > 0">
                     <mycate v-for="child in data.children" :key="child.id" :data='child'/>
 
