@@ -4,6 +4,7 @@
     <Head></Head>
     <!-- 头部结束 -->
 
+    <!-- 个人中心 -->
     <table border="1" cellspacing="0" width="80%">
       <tr>
         <th>头&emsp;像</th>
@@ -42,6 +43,27 @@
       </tr>
     </table>
 
+
+    <br><br>
+    <hr>{{username}}关注课程
+    <br><br>
+
+    <!-- 关注的课程 -->
+    <table border="1" cellspacing='0' width=80%>
+      <tr>
+        <th>课程名称</th>
+        <th>课程简介</th>
+        <th>课程价格</th>
+        <th>关注人</th>
+      </tr>
+      <tr v-for="item in flow_list" :key="item.id">
+        <th>{{item.course.title}}</th>
+        <th>{{item.course.desc}}</th>
+        <th>{{item.course.price}}</th>
+        <th>{{item.user.username}}</th>
+      </tr>
+    </table>
+
     <!-- 尾部开始 -->
     <Tail></Tail>
     <!-- 尾部结束 -->
@@ -58,8 +80,10 @@ import Tail from "./tail.vue";
 export default {
   data() {
     return {
+      username:localStorage.getItem('username'),
       token: localStorage.getItem("token"),
       user_list: [],
+      flow_list:[],
     };
   },
   components: { Head, Tail },
@@ -129,6 +153,20 @@ export default {
         this.$router.go(0);
       });
     },
+
+
+    show_flow(){
+      axios({
+        url:'http://127.0.0.1:8000/showflow/',
+        method:'get',
+        params:{
+          token:this.token
+        }
+      }).then(resp=>{
+        console.log(resp.data)
+        this.flow_list = resp.data
+      })
+    }
   },
   created() {
     axios({
@@ -140,7 +178,8 @@ export default {
     }).then((resp) => {
       console.log(resp.data);
       this.user_list = resp.data;
-    })
+    }),
+    this.show_flow()
   },
 };
 </script>

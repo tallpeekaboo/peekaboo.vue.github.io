@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 import Axios from 'axios'
 Vue.prototype.axios = Axios;
 
-Axios.defaults.withCredentials = true;
+// Axios.defaults.withCredentials = true;
 
 
 import echarts from 'echarts'

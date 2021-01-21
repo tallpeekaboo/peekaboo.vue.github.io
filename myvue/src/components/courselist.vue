@@ -1,5 +1,11 @@
 <template>
-    <div class="udlite-container partners">
+    <div>
+        <!-- 头部开始 -->
+        <Head></Head>
+        <!-- 头部结束 -->
+
+
+        <div class="udlite-container partners">
         <!-- 表格控件 -->
         <van-grid v-for="(item,index) in data" :key="index">
             <van-grid-item link-type='redirectTo'
@@ -14,12 +20,23 @@
         <input type="text" v-model="ye"/>
 
         <button @click="jump">跳</button>
+        </div>
+
+
+
+        <!-- 尾部开始 -->
+        <Tail></Tail>
+        <!-- 尾部结束 -->
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Head from './head.vue'
+
+import Tail from './tail.vue'
 export default {
+    components:{Head,Tail},
     data() {
         return {
             data:[],

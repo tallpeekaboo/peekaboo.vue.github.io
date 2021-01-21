@@ -1,22 +1,59 @@
 <template>
-    <div class="udlite-container partners">
-        <van-cell-group v-for="item in info_list" :key="item.id">
-            <van-cell title="课程标题 " :value="item.title"/>
-            <van-cell title="课程描述 " :value="item.desc"/>
-            <van-cell title="课程价格 " :value="item.price"/>
-            <video width="300" height="240" :src="src + item.video" controls='controls' autoplay='autoplay' muted></video>
-        </van-cell-group>
+    <div>
+        <!-- 头部开始 -->
+        <Head></Head>
+        <!-- 头部结束 -->
+
+        <div class="udlite-container partners">
+        <table border="1" cellspacing='0' width='80%'>
+            <tr>
+                <th>课程标题</th>
+                <th>课程详情</th>
+                <th>课程价格</th>
+                <th>课程分类</th>
+                <th>课程视频</th>
+            </tr>
+            <tr>
+                <th>{{info_list.title}}</th>
+                <th>{{info_list.desc}}</th>
+                <th>{{info_list.price}}</th>
+                <th>{{name}}
+                    {{cate_list.cate1.name}}
+                    {{cate_list.cate2.name}}
+                    {{cate_list.cate3.name}}
+                </th>
+                <th><video width="100" height="100" id='video' :src="src" controls='controls' autoplay='autoplay' muted/></th>
+            </tr>
+        </table>
+        <van-button @click="into">{{msg}}画中画</van-button>
+        <br><br><br>
+        状态:{{show}}课程<van-switch v-model="checked" size="24px" @click="flow"/>
+        </div>
+
+        <!-- {{cate_id}} -->
+        <!-- 尾部开始 -->
+        <Tail></Tail>
+        <!-- 尾部结束 -->
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Head from './head.vue'
+
+import Tail from './tail.vue'
 export default {
+    components:{Head,Tail},
     data() {
         return {
             cid:this.$route.query.cid,
             info_list:{},
-            src:'http://127.0.0.1:8000/static/upload/',
+            src:'',
+            msg:'进入',
+            show:"未关注",
+            name:"",
+            checked:true,
+            cate_list:{},
         }
     },
     methods: {
@@ -31,12 +68,83 @@ export default {
                 console.log(resp.data)
                 this.$toast(resp.data.msg)
                 this.info_list = resp.data
+                this.name = resp.data.cid.name
+                this.src = 'http://127.0.0.1:8000/static/upload/' + this.info_list.video
+            })
+        },
+        // 画中画功能
+        into(){
+            if(video !== document.pictureInPictureElement){
+                video.requestPictureInPicture()
+                this.msg = '退出'
+            }else{
+                document.exitPictureInPicture()
+                this.msg = '进入'
+            }
+        },
+
+        get_flow(){
+            axios({
+                url:'http://127.0.0.1:8000/getflow/',
+                method:'get',
+                params:{
+                    token:localStorage.getItem('token'),
+                    cid:this.cid
+                }
+            }).then(resp=>{
+                console.log(resp.data)
+                let bool = {'true':true,'false':false}
+                this.checked = bool[resp.data.state]
+            })
+        },
+        flow(){
+            if (this.checked === true) {
+                axios({
+                    url:'http://127.0.0.1:8000/getflow/',
+                    method:'delete',
+                    params:{
+                        token:localStorage.getItem('token'),
+                        cid:this.cid,
+                    }
+                }).then(resp=>{
+                    console.log(resp.data)
+                    this.$toast(resp.data.msg)
+                    this.show = '未关注'
+                })
+            }else{
+                axios({
+                    url:'http://127.0.0.1:8000/getflow/',
+                    method:'post',
+                    params:{
+                        token:localStorage.getItem('token'),
+                    },
+                    data:{
+                        cid:this.cid,
+                    }
+                }).then(resp=>{
+                    console.log(resp.data)
+                    this.$toast(resp.data.msg)
+                    this.show = '关注'
+                })
+            }
+        },
+        get_cate(){
+            axios({
+                url:'http://127.0.0.1:8000/getcate/?cid=' + this.cid,
+                method:'get',
+            }).then(resp=>{
+                console.log(resp.data)
+                this.cate_list = resp.data
             })
         }
     },
     created() {
         this.get_info()
-    }
+    },
+    mounted(){
+        this.get_cate()
+        this.get_flow()
+    },
 }
 </script>
 
