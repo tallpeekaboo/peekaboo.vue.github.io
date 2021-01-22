@@ -18,9 +18,6 @@
                 <th>{{info_list.desc}}</th>
                 <th>{{info_list.price}}</th>
                 <th>{{name}}
-                    {{cate_list.cate1.name}}
-                    {{cate_list.cate2.name}}
-                    {{cate_list.cate3.name}}
                 </th>
                 <th><video width="100" height="100" id='video' :src="src" controls='controls' autoplay='autoplay' muted/></th>
             </tr>
@@ -28,6 +25,9 @@
         <van-button @click="into">{{msg}}画中画</van-button>
         <br><br><br>
         状态:{{show}}课程<van-switch v-model="checked" size="24px" @click="flow"/>
+
+
+        课程打分:<van-rate v-model="value" icon="like" void-icon="like-o" @change="onChange"/> 当前课程平均分:{{avg}}
         </div>
 
         <!-- {{cate_id}} -->
@@ -53,7 +53,9 @@ export default {
             show:"未关注",
             name:"",
             checked:true,
-            cate_list:{},
+            cate:{},
+            value:3,
+            avg:'',
         }
     },
     methods: {
@@ -81,6 +83,52 @@ export default {
                 document.exitPictureInPicture()
                 this.msg = '进入'
             }
+        },
+
+        avgscore(){
+            axios({
+                url:'http://127.0.0.1:8000/avgscore/',
+                method:'get',
+                params:{
+                    cid:this.cid
+                }
+            }).then(resp=>{
+                console.log(resp.data.avg,'当前课程平均分')
+                this.avg = resp.data.avg['score__avg']
+            })
+        },
+
+
+        // 获取当前用户分数
+        get_change(){
+            axios({
+                url:'http://127.0.0.1:8000/getscore/',
+                method:'get',
+                params:{
+                    cid:this.cid,
+                    token:localStorage.getItem('token')
+                }
+            }).then(resp=>{
+                this.value = resp.data[0].score
+            })
+        },
+
+        // 打分动作
+        onChange(value){
+            this.$toast('您当前打分是:' + value + '颗♥')
+            axios({
+                url:'http://127.0.0.1:8000/getscore/',
+                method:'put',
+                params:{
+                    token:localStorage.getItem('token')
+                },
+                data:{
+                    cid:this.cid,
+                    value:value
+                }
+            }).then(resp=>{
+                console.log(resp.data)
+            })
         },
 
         get_flow(){
@@ -127,23 +175,40 @@ export default {
                     this.show = '关注'
                 })
             }
-        },
-        get_cate(){
-            axios({
-                url:'http://127.0.0.1:8000/getcate/?cid=' + this.cid,
-                method:'get',
-            }).then(resp=>{
-                console.log(resp.data)
-                this.cate_list = resp.data
-            })
         }
     },
     created() {
         this.get_info()
+        this.avgscore()
+
     },
     mounted(){
-        this.get_cate()
         this.get_flow()
+        this.get_change()
+        //递归向上查找
+        const data = [{id:1,name:'计算机课程',children:[{id:2,name:'计算机语言',children:[{id:3,name:'python'}]}]}]
+
+        let nodes = []
+        function getParentNodes(id,tree){
+            _getParentNodes([],id,tree)
+            return nodes
+        }
+
+        function _getParentNodes(his,targetId,tree){
+            tree.some((list)=>{
+                const children = list.children || []
+
+                if(list.id === targetId){
+                    nodes = his
+                    return true
+                }else if (children.length > 0) {
+                    const history = [...his]
+                    history.push(list)
+                    return _getParentNodes[history,targetId,children]
+                }
+            })
+        }
+        console.log(getParentNodes(3,data))
     },
 }
 </script>
