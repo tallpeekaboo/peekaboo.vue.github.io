@@ -2,7 +2,7 @@
   <a-form-model :layout="form.layout" :model="form" v-bind="formItemLayout">
     <a-form-model-item label="Form Layout">
       <a-radio-group v-model="form.layout">
-        <a-radio-button value="horizontal">
+        <a-radio-button value="切换样式">
           Horizontal
         </a-radio-button>
         <a-radio-button value="vertical">
