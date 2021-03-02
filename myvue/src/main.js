@@ -19,14 +19,14 @@ Vue.prototype.$echarts = echarts
 import QS from 'qs'
 Vue.prototype.qs = QS;
 
-// import ant from 'ant-design-vue'
-// import 'ant-design-vue/dist/antd.css'
+import ant from "ant-design-vue";
+import "ant-design-vue/dist/antd.css";
+Vue.use(ant);
 
-// Vue.use(ant)
 
-import Vant from 'vant';
-import 'vant/lib/index.css';
-Vue.use(Vant);
+// import Vant from 'vant';
+// import 'vant/lib/index.css';
+// Vue.use(Vant);
 
 
 

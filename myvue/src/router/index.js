@@ -24,6 +24,7 @@ import showcate from "@/components/showcate";
 import add_course from "@/components/add_course";
 import courselist from "@/components/courselist";
 import courseinfo from "@/components/courseinfo";
+import ant_reg from "@/components/ant_reg";
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ var routes = [
     path: "/myindex",
     name: "myindex",
     component: myindex
+  },
+  {
+    path: "/ant_reg",
+    name: "ant_reg",
+    component: ant_reg
   },
   {
     path: "/myregister",
