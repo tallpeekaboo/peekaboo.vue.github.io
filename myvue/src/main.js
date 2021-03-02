@@ -24,9 +24,9 @@ import "ant-design-vue/dist/antd.css";
 Vue.use(ant);
 
 
-// import Vant from 'vant';
-// import 'vant/lib/index.css';
-// Vue.use(Vant);
+import Vant from "vant";
+import "vant/lib/index.css";
+Vue.use(Vant);
 
 
 
