@@ -26,6 +26,10 @@ import courselist from "@/components/courselist";
 import courseinfo from "@/components/courseinfo";
 import ant_reg from "@/components/ant_reg";
 import ant_log from "@/components/ant_log";
+import ant_index from "@/components/ant_index";
+import create from "@/components/user/create";
+import newdelete from "@/components/user/newdelete";
+import put from "@/components/user/put";
 
 Vue.use(Router)
 
@@ -49,6 +53,26 @@ var routes = [
     path: "/ant_reg",
     name: "ant_reg",
     component: ant_reg
+  },
+  {
+    path: "/ant_index",
+    name: "ant_index",
+    component: ant_index
+  },
+  {
+    path: "/create",
+    name: "create",
+    component: create
+  },
+  {
+    path: "/newdelete",
+    name: "newdelete",
+    component: newdelete
+  },
+  {
+    path: "/put",
+    name: "put",
+    component: put
   },
   {
     path: "/myregister",
