@@ -20,8 +20,8 @@
       <a-input v-model="form.password" placeholder="请输入密码" />
     </a-form-model-item>
     <a-form-model-item :wrapper-col="buttonItemLayout.wrapperCol">
-      <a-button type="primary" @click="register">
-        注&emsp;册
+      <a-button type="primary" @click="login">
+        登&emsp;录
       </a-button>
     </a-form-model-item>
   </a-form-model>
@@ -58,9 +58,9 @@ export default {
     },
   },
   methods: {
-    register(){
+    login(){
       Axios({
-        url:'http://127.0.0.1:8000/newapp/register/',
+        url:'http://127.0.0.1:8000/newapp/login/',
         method:'post',
         data:{
           username:this.form.username,
