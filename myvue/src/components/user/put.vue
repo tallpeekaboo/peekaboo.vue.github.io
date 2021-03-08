@@ -35,13 +35,13 @@ export default {
           })
       },
       newput(uid){
-          var password1 = prompt('newpassword',this.newpassword)
+          var password = prompt('newpassword',this.newpassword)
           axios({
               url:'http://127.0.0.1:8000/newapp/userinfo/',
               method:'put',
               params:{
                   uid:uid,
-                  password:password1,
+                  password:password,
               }
           }).then(resp=>{
               console.log(resp.data)

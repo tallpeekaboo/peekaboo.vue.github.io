@@ -6,7 +6,7 @@ import add_worktype from '@/components/add_worktype'
 import chatroom from '@/components/chatroom'
 import client from '@/components/client'
 import home from '@/components/home'
-// import item from '@/components/item'
+// import item from "@/components/item";
 import leftmenu from '@/components/leftmenu'
 import login from '@/components/login'
 import register from '@/components/register'
@@ -30,6 +30,7 @@ import ant_index from "@/components/ant_index";
 import create from "@/components/user/create";
 import newdelete from "@/components/user/newdelete";
 import put from "@/components/user/put";
+import showuser from "@/components/user/showuser";
 
 Vue.use(Router)
 
@@ -57,22 +58,29 @@ var routes = [
   {
     path: "/ant_index",
     name: "ant_index",
-    component: ant_index
-  },
-  {
-    path: "/create",
-    name: "create",
-    component: create
-  },
-  {
-    path: "/newdelete",
-    name: "newdelete",
-    component: newdelete
-  },
-  {
-    path: "/put",
-    name: "put",
-    component: put
+    component: ant_index,
+    children: [
+      {
+        path: "/create",
+        name: "create",
+        component: create
+      },
+      {
+        path: "/newdelete",
+        name: "newdelete",
+        component: newdelete
+      },
+      {
+        path: "/put",
+        name: "put",
+        component: put
+      },
+      {
+        path: "/showuser",
+        name: "showuser",
+        component: showuser
+      }
+    ]
   },
   {
     path: "/myregister",

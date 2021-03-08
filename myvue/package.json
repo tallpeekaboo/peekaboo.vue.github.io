@@ -17,6 +17,7 @@
     "js-md5": "^0.7.3",
     "less": "^3.12.2",
     "less-loader": "^7.0.2",
+    "react-router-dom": "^5.2.0",
     "style-loader": "^0.23.1",
     "vant": "^2.12.2",
     "vue": "^2.5.2",

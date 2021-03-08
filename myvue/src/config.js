@@ -9,4 +9,4 @@ export const config = {
   
   export function formatXml(text) {
   　　return text
-  }
+}
