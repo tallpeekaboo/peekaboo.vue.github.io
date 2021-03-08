@@ -8,27 +8,27 @@
       v-model="collapsed"
     >
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
-        <a-menu-item key="1">
+      <a-menu theme="dark" mode="inline" :selectedKeys="[$route.path]">
+        <a-menu-item key="/showuser">
           <a-icon type="user" />
           <span class="nav-text">所有用户</span>
-          <router-link to='showuser'></router-link>
+          <router-link to='/showuser'></router-link>
         </a-menu-item>
 
-        <a-menu-item key="2">
+        <a-menu-item key="/create">
           <a-icon type="video-camera" />
           <span class="nav-text">添加用户</span>
-          <router-link to='create'></router-link>
+          <router-link to='/create'></router-link>
         </a-menu-item>
-        <a-menu-item key="3">
+        <a-menu-item key="/put">
           <a-icon type="upload" />
           <span class="nav-text">修改用户</span>
-          <router-link to='put'></router-link>
+          <router-link to='/put'></router-link>
         </a-menu-item>
-        <a-menu-item key="4">
+        <a-menu-item key="/newdelete">
           <a-icon type="user" />
           <span class="nav-text">删除用户</span>
-          <router-link to='newdelete'></router-link>
+          <router-link to='/newdelete'></router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
